@@ -1,19 +1,16 @@
 $(document).ready( function(){
-  function getProduct(id) {
+  $('#show_all').on('click', function() {
     $.ajax({
-      url: 'http://json-server.devpointlabs.com/api/v1/products' + id,
+      url: 'http://json-server.devpointlabs.com/api/v1/products',
       type: 'GET',
-      dataType: 'JSON',
-      type: 'GET'
+      dataType: 'JSON'
     }).done( function(products) {
-      if (editingProduct) {
-        var li = $("[data-id='" + id + "'")
-        $(li).replaceWith(product)
-        editingProducts = null;
-      } else {
-        $('#products-list').append(products);
-      };
+      var list = $('#listy');
+      list.empty();
+      products.forEach( function(a){
+        var li = '<li>' + a.name + ', ' + a.description + ' ' + a.id + ', ' +'</li>'       
+        list.append(li)
+      });
     });
-  };
+  });
 });
-  
